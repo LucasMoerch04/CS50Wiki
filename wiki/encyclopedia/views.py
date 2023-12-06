@@ -8,6 +8,9 @@ from django import forms
 class NewForm(forms.Form):
     search = forms.CharField(label= "",max_length=100)
 
+class ConfForm(forms.Form):
+        title = forms.CharField(widget=forms.TextInput(attrs={'id':'textinput'}))
+        content = forms.CharField(widget=forms.Textarea(attrs={'id':'textarea'}), label="Content:")
 
     
 def index(request):
@@ -66,4 +69,40 @@ def search(request):
                     "query": query,
                 })
                     
-                    
+
+def new(request):
+    return render(request, "encyclopedia/conf/newpage.html", {
+        "form": NewForm(),
+        "confform": ConfForm()
+    })
+    
+def new_save(request):
+    if request.method == "POST":
+        form = ConfForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            entries = util.list_entries()
+            print(title, content)
+
+            entries_lower = [x.lower() for x in entries]
+            
+            for entry in entries_lower:
+                if title.lower() == entry:
+                    TitleTaken = True
+                    return render(request, "encyclopedia/errorpage.html", {
+                        'title':title,
+                        "form": NewForm(),
+                        "saveError": TitleTaken
+                        })
+            
+                
+            print(title, content)
+            util.save_entry(title, content)
+            
+            page = util.get_entry(title)
+            return render(request, "encyclopedia/page.html",{
+                'title': title,
+                "content": markdown2.markdown(page),
+                "form": NewForm()
+            })

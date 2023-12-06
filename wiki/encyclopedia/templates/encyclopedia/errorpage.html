@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <h1> Wiki for {{title}} was not found. </h1>
+    {% if saveError %}
+        <h1> Entry titled "{{title}}" already exists.
+    {% else %}
+        <h1> Wiki for "{{title}}" was not found. </h1>
+    {% endif %}
 {% endblock%}
 

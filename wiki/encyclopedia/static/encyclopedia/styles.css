@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: white;
+    
 }
 
 code {
@@ -10,11 +10,52 @@ code {
 h1 {
     margin-top: 0px;
     padding-top: 20px;
+    
 }
 
-textarea {
-    height: 90vh;
+label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    width: auto;
+    line-height: 26px;
+    margin-bottom: 5px;
+    font-size: 24px;
+    
+    
+  }
+
+#textinput, textarea {
+    font-size: 18;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    
+}
+
+#textarea {
+    height: 50vh;
     width: 80%;
+    
+}
+
+#submit{
+    font-weight: bold;
+    color: white;
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(145, 145, 252);
+}
+#submit:hover{
+    background-color: rgb(109, 109, 255);
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+
+#submit:focus{
+    box-shadow: none;
+    background-color: rgb(101, 101, 250);
 }
 
 .main {
