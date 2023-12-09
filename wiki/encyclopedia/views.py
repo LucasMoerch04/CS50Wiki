@@ -10,7 +10,7 @@ class NewForm(forms.Form):
 
 class ConfForm(forms.Form):
         title = forms.CharField(widget=forms.TextInput(attrs={'id':'textinput'}))
-        content = forms.CharField(widget=forms.Textarea(attrs={'id':'textarea'}), label="Content:")
+        content = forms.CharField(widget=forms.Textarea(attrs={'id':'textarea'}), label="Content:", initial="")
 
     
 def index(request):
@@ -98,6 +98,35 @@ def new_save(request):
             
                 
             print(title, content)
+            util.save_entry(title, content)
+            
+            page = util.get_entry(title)
+            return render(request, "encyclopedia/page.html",{
+                'title': title,
+                "content": markdown2.markdown(page),
+                "form": NewForm()
+            })
+            
+def edit(request, title):
+    page = util.get_entry(title)
+    conf_form = ConfForm(initial={'content': page, 'title': title})
+    
+    
+    return render(request, "encyclopedia/editpage.html", {
+        "page" : page,
+        "form": NewForm(),
+        "confform": conf_form,
+        'title': title,
+        "content": markdown2.markdown(page),
+    })
+    
+def edit_save(request):
+    if request.method == "POST":
+        form = ConfForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+
             util.save_entry(title, content)
             
             page = util.get_entry(title)

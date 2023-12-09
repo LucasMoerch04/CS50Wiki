@@ -6,4 +6,5 @@
 
 {% block body %}
     {{ content|safe }}
+    <a id="edit" href="{% url 'wiki:edit' title=title %}">Edit</a>
 {% endblock %}

@@ -1,3 +1,5 @@
+
+
 body {
     margin: 0;
     
@@ -24,6 +26,7 @@ label {
     font-size: 24px;
     
     
+    
   }
 
 #textinput, textarea {
@@ -35,8 +38,19 @@ label {
 
 #textarea {
     height: 50vh;
-    width: 80%;
+    max-width: 80%;
     
+}
+
+#edit{
+    text-align: right;
+    
+    display: flex;
+    justify-content: right;
+    margin-right: 20px;
+    
+    
+    outline: red solid 1px;
 }
 
 #submit{
@@ -60,6 +74,7 @@ label {
 
 .main {
     padding: 10px;
+    max-width: 80vw;
 }
 
 .search {
