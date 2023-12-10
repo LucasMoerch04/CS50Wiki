@@ -4,6 +4,7 @@ from . import util
 from django.urls import reverse
 import markdown2
 from django import forms
+import random as rand
 
 class NewForm(forms.Form):
     search = forms.CharField(label= "",max_length=100)
@@ -135,3 +136,9 @@ def edit_save(request):
                 "content": markdown2.markdown(page),
                 "form": NewForm()
             })
+            
+def random(request):
+    entries = util.list_entries()
+    page = rand.choice(entries)
+    
+    return get_page(request, page)

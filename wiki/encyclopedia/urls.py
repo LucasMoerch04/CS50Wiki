@@ -12,5 +12,6 @@ urlpatterns = [
     path("new_save/", views.new_save, name="new_save"),
     path("<str:title>/edit-page/", views.edit, name="edit"),
     path("edit_save/", views.edit_save, name="edit_save"),
+    path("random-page/", views.random, name="random-page")
     
 ]
