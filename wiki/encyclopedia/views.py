@@ -7,11 +7,11 @@ from django import forms
 import random as rand
 
 class NewForm(forms.Form):
-    search = forms.CharField(label= "",max_length=100)
+    search = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Search"}), label= "",max_length=100)
 
 class ConfForm(forms.Form):
         title = forms.CharField(widget=forms.TextInput(attrs={'id':'textinput'}))
-        content = forms.CharField(widget=forms.Textarea(attrs={'id':'textarea'}), label="Content:", initial="")
+        content = forms.CharField(widget=forms.Textarea(attrs={'id':'textarea', 'placeholder': "Markdown text"}), label="Content:")
 
     
 def index(request):
@@ -63,11 +63,13 @@ def search(request):
                 return render(request, "encyclopedia/results.html",{
                     "entries": entry_titles,
                     "query": query,
-                    "found": found
+                    "found": found,
+                    "form": form
                 })
             else: 
                 return render(request, "encyclopedia/results.html",{
                     "query": query,
+                    "form": form
                 })
                     
 
